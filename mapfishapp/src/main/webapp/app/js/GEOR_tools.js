@@ -133,7 +133,7 @@ GEOR.tools = (function() {
                 layerOptions: {styleMap: styleMap}
             }
         });
-        
+
         var showPopup = function(event) {
             popup && popup.destroy();
             popup = new GeoExt.Popup({
@@ -223,10 +223,12 @@ GEOR.tools = (function() {
         Ext.each(outgoing, function(r) {
             var addon = addonsCache[r.id],
                 item = addon.item;
-            menu.remove(item, true);
-            addon.destroy();
-            delete addonsCache[r.id];
-            r.set("_loaded", false);
+            if(r.get('removable') == true) {
+                menu.remove(item, true);
+                addon.destroy();
+                delete addonsCache[r.id];
+                r.set("_loaded", false);
+            }
         });
         // load new addons:
         GEOR.waiter.show(incoming.length);
@@ -246,7 +248,7 @@ GEOR.tools = (function() {
                         )
                     });
                 };
-            // get corresponding manifest.json 
+            // get corresponding manifest.json
             OpenLayers.Request.GET({
                 url: addonPath + "manifest.json",
                 success: function(response) {
@@ -255,14 +257,14 @@ GEOR.tools = (function() {
                         return;
                     }
                     // TODO: handle repeated files (eg: same addon with different parameters)
-                    var js = [], 
+                    var js = [],
                         o = (new OpenLayers.Format.JSON()).read(
                             response.responseText
                         );
                     // handle i18n
                     if (o.i18n) {
                         Ext.iterate(o.i18n, function(k, v) {
-                            OpenLayers.Lang[k] = 
+                            OpenLayers.Lang[k] =
                                 OpenLayers.Util.extend(OpenLayers.Lang[k], v);
                         });
                     }
@@ -280,27 +282,29 @@ GEOR.tools = (function() {
                                 alert("GEOR.Addons."+addonName+" namespace should be defined !");
                                 return;
                             }
-                            // init addon
-                            var addon = new GEOR.Addons[addonName](map, Ext.apply({}, 
-                                r.get("options") || {}, 
-                                o.default_options || {}
-                            ));
-                            addonsCache[r.id] = addon;
-                            // we're passing the record to the init method
-                            // so that the addon has access to the administrator's strings
-                            addon.init(r);
-                            r.set("_loaded", true);
-                            // keep the original order (the one defined by the admin)
-                            var records = store.query("_loaded", true);
-                            for (var i=0,l=records.getCount(); i<l;i++) {
-                                if (records.get(i) === r) {
-                                    break;
+                            if(r.get('removable') == true || r.get('_loaded') == false) {
+                                // init addon
+                                var addon = new GEOR.Addons[addonName](map, Ext.apply({},
+                                    r.get("options") || {},
+                                    o.default_options || {}
+                                ));
+                                addonsCache[r.id] = addon;
+                                // we're passing the record to the init method
+                                // so that the addon has access to the administrator's strings
+                                addon.init(r);
+                                r.set("_loaded", true);
+                                // keep the original order (the one defined by the admin)
+                                var records = store.query("_loaded", true);
+                                for (var i=0,l=records.getCount(); i<l;i++) {
+                                    if (records.get(i) === r) {
+                                        break;
+                                    }
                                 }
+                                // handle menuitem qtip:
+                                addon.item.on('afterrender', GEOR.util.registerTip);
+                                // here we know it should be inserted at position i from the beginning
+                                menu.insert(i + 2, addon.item);
                             }
-                            // handle menuitem qtip:
-                            addon.item.on('afterrender', GEOR.util.registerTip);
-                            // here we know it should be inserted at position i from the beginning
-                            menu.insert(i + 2, addon.item);
                         }, this, true);
                     }
                 },
@@ -353,7 +357,7 @@ GEOR.tools = (function() {
      * Creates/shows the tools selection window
      */
     var showToolSelection = function() {
-        var target = (GEOR.config.ANIMATE_WINDOWS) ? 
+        var target = (GEOR.config.ANIMATE_WINDOWS) ?
             this.el : undefined;
 
         if (win) {
@@ -383,7 +387,7 @@ GEOR.tools = (function() {
                             '<img src="{[this.thumb(values)]}" class="thumb" />',
                         '</td></tr></table>',
                     '</div>',
-                '</tpl>', 
+                '</tpl>',
             {
                 compiled: true,
                 disableFormats: true,
@@ -523,6 +527,8 @@ GEOR.tools = (function() {
                     name: "_loaded", defaultValue: false, type: "boolean"
                 }, {
                     name: "preloaded", defaultValue: false, type: "boolean"
+                }, {
+                    name: "removable", defaultValue: true, type: "boolean"
                 }],
                 data: allowedAddons
             });
