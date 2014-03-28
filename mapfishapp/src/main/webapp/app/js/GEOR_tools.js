@@ -408,6 +408,9 @@ GEOR.tools = (function() {
                             if (r.get("_loaded") === true) {
                                 dv.select(r, true, true);
                             }
+                            if (r.get("removable") === false) {
+                                dv.store.remove(r, true);
+                            }
                         });
                     },
                     single: true
