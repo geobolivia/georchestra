@@ -23,6 +23,7 @@ import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
+import org.springframework.security.authentication.encoding.LdapShaPasswordEncoder;
 
 /**
  * This class is responsible of maintaining the user accounts (CRUD operations). 
@@ -479,9 +480,13 @@ public final class AccountDaoImpl implements AccountDao{
 		Name dn = buildDn(uid);
 		DirContextOperations context = ldapTemplate.lookupContext(dn);
 		
-		// the following action remove the old password. It there are two password (old and new password) they will 
+		// the following action removes the old password. It there are two password (old and new password) they will 
 		// be replaced by a single user password
-		context.setAttributeValue("userPassword", password);
+		LdapShaPasswordEncoder lspe = new LdapShaPasswordEncoder();
+		String encrypted = lspe.encodePassword(password,
+					String.valueOf(System.currentTimeMillis()).getBytes());
+		
+		context.setAttributeValue("userPassword", encrypted);
 		
 		ldapTemplate.modifyAttributes(context);
 	}
@@ -505,8 +510,10 @@ public final class AccountDaoImpl implements AccountDao{
 		if( newPassword.length()== 0 ){
 			throw new IllegalArgumentException("new password is required");
 		}
-		
-		 // update the entry in the ldap tree
+		LdapShaPasswordEncoder lspe = new LdapShaPasswordEncoder();
+		String encrypted = lspe.encodePassword(newPassword,
+					String.valueOf(System.currentTimeMillis()).getBytes());
+		// update the entry in the LDAP tree
 		Name dn = buildDn(uid);
 		DirContextOperations context = ldapTemplate.lookupContext(dn);
 		
@@ -514,7 +521,7 @@ public final class AccountDaoImpl implements AccountDao{
 		Object[] pwdValues = context.getObjectAttributes(pwd);
 		if(pwdValues.length < 2){
 			// adds the new password
-			context.addAttributeValue(pwd, newPassword, false);
+			context.addAttributeValue(pwd, encrypted, false);
 		} else {
 			// update the last password with the new password
 			pwdValues[1] = newPassword;
