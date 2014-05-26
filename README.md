@@ -3,12 +3,13 @@ geOrchestra
 
 geOrchestra is a complete **Spatial Data Infrastructure** solution.
 
-It features a **metadata catalog** (GeoNetwork 2.10), an **OGC server** (GeoServer 2.3.2), an **advanced viewer and editor**, an **extractor** and **many more** (security and auth system based on proxy/CAS/LDAP, analytics, admin UIs, ...)
+It features a **metadata catalog** (GeoNetwork 2.10), an **OGC server** (GeoServer 2.3.2) with fine-grained access control (based on GeoFence), an **advanced viewer and editor**, an **extractor** and **many more** (security and auth system based on proxy/CAS/LDAP, analytics, admin UIs, ...)
 
 More information in the modules README:
  * [catalog](https://github.com/georchestra/geonetwork/blob/georchestra-29/README.md) (aka GeoNetwork)
  * [viewer](mapfishapp/README.md) (aka mapfishapp)
  * [extractor](extractorapp/README.md) (aka extractorapp)
+ * [geofence](https://github.com/georchestra/geofence/blob/georchestra/georchestra.md)
  * [simple catalog](catalogapp/README.md) (aka catalogapp)
  * [analytics](analytics/README.md)
  * [ldapadmin](ldapadmin/README.md)
@@ -24,7 +25,7 @@ How to build ?
 
 First, install the required packages: 
 
-    sudo apt-get install ant ant-optional openjdk-7-jdk python-virtualenv
+    sudo apt-get install ant ant-optional openjdk-7-jdk python-virtualenv libjai-imageio-core-java
 
 Notes: 
  * openjdk-6-jdk works too 
@@ -110,5 +111,5 @@ Copy WAR files in Tomcat webapps dir:
     sudo cp -f /tmp/georchestra_deploy_tmp/* /var/lib/tomcat6/webapps
     sudo service tomcat6 start
 
-This is the basic idea, but one can use more advanced deploy scripts. An example is provided 
-[here](server-deploy/linux_deploy_scripts/Readme.md).
+This is the basic idea, but one can fully automate this step with custom crafted deployment scripts. 
+An [example](server-deploy/linux_deploy_scripts/) is provided in the server-deploy module.
