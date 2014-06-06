@@ -38,10 +38,8 @@ new PostTreatment().run(this, log, ant, project.basedir, params.projectDir, serv
 ]]></postTreatmentScript>
   </properties>
   <modules>
-    <module>geotools</module>
     <module>config</module>
     <module>header</module>
-    <module>epsg-extension</module>
     <module>ogc-server-statistics</module>
     <module>server-deploy-support</module>
   </modules>
@@ -219,17 +217,9 @@ class PostTreatment {
       </activation>
       <modules>
         <module>cas-server-webapp</module>
-        <module>catalogapp</module>
-        <module>extractorapp</module>
-        <module>geoserver</module>
-        <module>geowebcache-webapp</module>
-        <module>ldapadmin</module>
-        <module>mapfishapp</module>
         <module>security-proxy</module>
-        <module>geonetwork</module>
-        <module>downloadform</module>
-        <module>analytics</module>
         <module>header</module>
+        <module>ldapadmin</module>
       </modules>
     </profile>
     <profile>
@@ -245,51 +235,15 @@ class PostTreatment {
       </modules>
     </profile>
     <profile>
-      <id>catalogapp</id>
-      <modules>
-        <module>catalogapp</module>
-      </modules>
-    </profile>
-    <profile>
       <id>header</id>
       <modules>
         <module>header</module>
       </modules>
     </profile>
     <profile>
-      <id>extractorapp</id>
-      <modules>
-        <module>extractorapp</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>geoserver</id>
-      <modules>
-        <module>geoserver</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>geowebcache</id>
-      <modules>
-        <module>geowebcache-webapp</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>gwc</id>
-      <modules>
-        <module>geowebcache-webapp</module>
-      </modules>
-    </profile>
-    <profile>
       <id>ldapadmin</id>
       <modules>
         <module>ldapadmin</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>mapfishapp</id>
-      <modules>
-        <module>mapfishapp</module>
       </modules>
     </profile>
     <profile>
@@ -304,24 +258,6 @@ class PostTreatment {
         <module>security-proxy</module>
       </modules>
     </profile>
-    <profile>
-      <id>geonetwork</id>
-      <modules>
-        <module>geonetwork</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>downloadform</id>
-      <modules>
-        <module>downloadform</module>
-      </modules>
-    </profile>
-    <profile>
-      <id>analytics</id>
-      <modules>
-        <module>analytics</module>
-      </modules>
-    </profile>
   </profiles>
   <repositories>
     <repository>
@@ -331,15 +267,6 @@ class PostTreatment {
       </snapshots>
       <id>mapfish</id>
       <url>http://dev.mapfish.org/maven/repository</url>
-    </repository>
-    <!-- geotools -->
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>osgeo</id>
-      <name>Open Source Geospatial Foundation Repository</name>
-      <url>http://download.osgeo.org/webdav/geotools/</url>
     </repository>
     <repository>
       <id>opengeo</id>
