@@ -110,7 +110,7 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "Show metadata sheet in a new window":
         "Metadatei in neuem Fenster öffnen",
     "more": "mehr",
-    "Clic to select or deselect the layer":
+    "Click to select or deselect the layer":
         "Klicken Sie um den Layer anzuwählen oder auszuschalten",
     "Open the URL url in a new window":
         "Url ${URL}  in neuem Fenster öffnen",
@@ -127,6 +127,7 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "No metadata matches the query.":
         "Keine Metadaten entsprechen der Anfrage.",
     /* GEOR_fileupload.js strings */
+    "2D only": "nur 2D",
     "Local file": "Datei",
     "The service is inactive": "Dienstleistung ist nicht aktiv",
     "Upload a vector data file.": "Laden einer Datei mit vektoriellen Daten",
@@ -149,7 +150,7 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     /* GEOR_getfeatureinfo.js strings */
     "<div>Searching...</div>": "<div>suchen...</div>",
     "<div>No layer selected</div>": "<div>kein Layer markiert</div>",
-    "<div>Search on objects active for NAME layer. Clic on the map.</div>":
+    "<div>Search on objects active for NAME layer. Click on the map.</div>":
          "<div>Betreffsuche aktiviert auf Layer ${NAME}. " +
          "klicken Sie auf die Karte.</div>",
     "WMS GetFeatureInfo at ": "GetFeatureInfo WMS auf ",
@@ -231,7 +232,7 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "Location map": "Lageplan",
     "Warning after loading layer":
         "Warnug wegen Layer - Ladung",
-    "The <b>NAME</b> layer could not appear for that reason: ":
+    "The <b>NAME</b> layer could not appear for this reason: ":
         "Layer <b>${NAME}</b> könnte aus folgendem Grund " +
         "nicht aufgerufen werden : ",
     "Min/max visibility scales are invalid":
@@ -329,10 +330,10 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "Zoom to results extent": "Zoom auf Ergebnis",
     "CSV Export": "CSV exportieren",
     "Export results as CSV": "Exportieren der Gesamtergebnisse aus CSV",
-    "<p>No result for that request.</p>": "<p>Kein Ergebnis zu Ihrer Anfrage.</p>",
+    "<p>No result for this request.</p>": "<p>Kein Ergebnis zu Ihrer Anfrage.</p>",
     /* GEOR_scalecombo.js strings */
     /* GEOR_selectfeature.js strings */
-    "<div>Select features activated on NAME layer. Clic on the map.</div>":
+    "<div>Select features activated on NAME layer. Click on the map.</div>":
         "<div>Objektabfragen activiert ${NAME}. " +
         "Klicken Sie auf die Karte.</div>",
     "OpenLayers SelectFeature":"Objektselektion",
@@ -365,8 +366,6 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "Styler": "Styler",
     "Apply": "Ausführen",
     "Impossible to complete the operation:": "Operation nicht möglich :",
-    "no WFS service associated to that layer": "kein WFS Service " +
-        "mit diesem Layer verbunden.",
     "no available attribute": "kein Attribut verfügbar.",
     /* GEOR_toolbar.js strings */
     "m": "m",
@@ -399,7 +398,7 @@ OpenLayers.Lang.de = OpenLayers.Util.extend(OpenLayers.Lang.de, {
     "Manage tools": "Utensilien verwalten",
     "remember the selection": "Erinnern der Selektion",
     "Available tools:": "Utensilien vorhanden :",
-    "Clic to select or deselect the tool": "Klicken um Utensil abzuwählen",
+    "Click to select or deselect the tool": "Klicken um Utensil abzuwählen",
     "Could not load addon ADDONNAME": "${ADDONNAME} Addon laden unmöglich ",
     /* GEOR_util.js strings */
     "Characters": "Zeichen",
