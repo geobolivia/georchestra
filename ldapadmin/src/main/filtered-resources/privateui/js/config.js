@@ -1,3 +1,6 @@
 'use strict';
 
-var GEOR_config = {editUid: "${generateUid}"==="false"};
+var GEOR_config = {
+  editUid: "${generateUid}"==="false",
+  publicContextPath: "${publicContextPath}"
+};

@@ -214,6 +214,7 @@ angular.module('ldapadmin.controllers', [])
 
       $scope.groupsChanged = false;
       $scope.editUid = false;
+      $scope.publicContextPath = GEOR_config.publicContextPath;
 
       $scope.save = function() {
         $scope.user.put().then(function() {
@@ -297,6 +298,7 @@ angular.module('ldapadmin.controllers', [])
   })
   .controller('UserCreateCtrl', function($scope, Restangular, flash) {
       $scope.editUid = GEOR_config.editUid;
+      $scope.publicContextPath = GEOR_config.publicContextPath;
       $scope.save = function() {
         Restangular.all('users').post(
           $scope.user
